@@ -22,6 +22,7 @@ import java.util.UUID;
 public class Vipps extends AppCompatActivity {
 
     private BeaconManager beaconManager;
+    private final String TAG = Vipps.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +36,15 @@ public class Vipps extends AppCompatActivity {
         beaconManager.setMonitoringListener(new BeaconManager.MonitoringListener() {
             @Override
             public void onEnteredRegion(Region region, List<Beacon> list) {
-                Log.d("VIPPS", "ENTERING REGION");
+                Log.d(TAG, "ENTERING REGION");
                 showNotification(
-                        "Du er på kontoret",
+                        "Du er et kontoret",
                         "Kontoret er et lære");
             }
 
             @Override
             public void onExitedRegion(Region region) {
-                Log.d("VIPPS", "EXITING REGION");
+                Log.d(TAG, "EXITING REGION");
 
             }
         });
@@ -54,7 +55,8 @@ public class Vipps extends AppCompatActivity {
                 beaconManager.startMonitoring(new Region(
                         "office region",
                         UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"),
-                        34307, 58865
+                        53168,
+                        9502
                 ));
             }
         });
