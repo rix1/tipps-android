@@ -44,4 +44,10 @@
             app:layout_anchorGravity="bottom|end"
             android:src="@android:drawable/ic_dialog_email"/>
 
+    <ImageButton
+            android:id="@+id/showTipps"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/Tipps"/>
+
 </android.support.design.widget.CoordinatorLayout>
