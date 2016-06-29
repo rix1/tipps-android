@@ -8,8 +8,8 @@
               android:paddingLeft="@dimen/activity_horizontal_margin"
               android:paddingRight="@dimen/activity_horizontal_margin"
               android:paddingTop="@dimen/activity_vertical_margin"
-              android:textColor="#2F2F2F"
-              android:background="#D3D3D3"
+              android:textColor="#FFFFFF"
+              android:background="@drawable/v"
               tools:context="no.tipps.tipps.LoginActivity">
 
     <!-- Login progress -->
@@ -24,8 +24,7 @@
     <ScrollView
             android:id="@+id/login_form"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#D3D3D3">
+            android:layout_height="match_parent">
 
         <LinearLayout
                 android:id="@+id/email_login_form"
@@ -54,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/intro"
                     android:layout_marginTop="50dp"
-                    android:textColor="#2F2F2F"
+                    android:textColor="#FFFFFF"
                     android:textStyle="bold"
                     android:textSize="24dp"/>
 
@@ -64,20 +63,22 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                 <RadioButton android:id="@+id/radio_spender"
-                             android:textColor="#2F2F2F"
+                             android:textColor="#FFFFFF"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
                              android:text="@string/bigSpender"
                              android:layout_marginTop="20dp"
                              android:textSize="20dp"
+                             android:layout_marginLeft="20dp"
                              android:checked="true"/>
                 <RadioButton android:id="@+id/radio_saving"
-                             android:textColor="#2F2F2F"
+                             android:textColor="#FFFFFF"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
                              android:layout_marginTop="20dp"
-                             android:layout_marginBottom="100dp"
+                             android:layout_marginBottom="130dp"
                              android:textSize="20dp"
+                             android:layout_marginLeft="20dp"
                              android:text="@string/savingMode"/>
             </RadioGroup>
 
