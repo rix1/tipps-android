@@ -9,6 +9,27 @@
         android:id="@+id/background"
         android:background="@drawable/vippsbackground">
 
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar_height"
+            android:background="@color/green1"/>
+
+    <ImageView
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:background="@drawable/profilepic"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="150dp"/>
+
+    <TextView
+            android:text="@string/username"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="150dp"/>
+
     <ImageButton
             android:id="@+id/tippsButton"
             android:layout_width="38dp"

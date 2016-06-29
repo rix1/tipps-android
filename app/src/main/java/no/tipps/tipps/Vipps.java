@@ -86,7 +86,7 @@ public class Vipps extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!showTipps) {
-                    background.setBackgroundResource(R.drawable.borsbarentippser);
+                    background.setBackgroundResource(R.drawable.borsbarentippser1);
                     showTipps = true;
                 }else{
                     background.setBackgroundResource(R.drawable.vippsbackground);
