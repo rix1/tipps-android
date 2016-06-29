@@ -8,6 +8,7 @@
               android:paddingLeft="@dimen/activity_horizontal_margin"
               android:paddingRight="@dimen/activity_horizontal_margin"
               android:paddingTop="@dimen/activity_vertical_margin"
+              android:background="@color/vippsColor"
               tools:context="no.tipps.tipps.LoginActivity">
 
     <!-- Login progress -->
@@ -22,13 +23,37 @@
     <ScrollView
             android:id="@+id/login_form"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/vippsColor">
 
         <LinearLayout
                 android:id="@+id/email_login_form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/intro"
+                    android:layout_marginTop="50dp"
+            />
+
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                <RadioButton android:id="@+id/radio_spender"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:text="@string/bigSpender"
+                             android:onClick="onRadioButtonClicked"/>
+                <RadioButton android:id="@+id/radio_saving"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:text="@string/savingMode"
+                             android:onClick="onRadioButtonClicked"/>
+            </RadioGroup>
 
             <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -38,26 +63,9 @@
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/prompt_email"
+                        android:layout_marginTop="100dp"
+                        android:hint="@string/prompt_name"
                         android:inputType="textEmailAddress"
-                        android:maxLines="1"
-                        android:singleLine="true"/>
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                <EditText
-                        android:id="@+id/password"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/prompt_password"
-                        android:imeActionId="@+id/login"
-                        android:imeActionLabel="@string/action_sign_in_short"
-                        android:imeOptions="actionUnspecified"
-                        android:inputType="textPassword"
                         android:maxLines="1"
                         android:singleLine="true"/>
 
@@ -68,9 +76,12 @@
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:text="@string/action_sign_in"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:layout_marginTop="50dp"
+                    android:layout_gravity="center_horizontal|bottom"/>
+
+
 
         </LinearLayout>
     </ScrollView>
