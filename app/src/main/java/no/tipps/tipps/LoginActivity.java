@@ -23,11 +23,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +57,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private RadioGroup radioGroup;
+    private RadioButton radioButton;
+    private Button register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +91,28 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        radioGroup = (RadioGroup) findViewById(R.id.radio);
+        //register = (Button) findViewById(R.id.email_sign_in_button);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId)
+            {
+                switch(checkedId)
+                {
+                    case R.id.radio_spender:
+                        // TODO Something
+                        break;
+                    case R.id.radio_saving:
+                        // TODO Something
+                        break;
+                }
+            }
+        });
     }
+
 
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
@@ -346,21 +366,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
         }
     }
-//    public void onRadioButtonClicked(View view) {
-//        // Is the button now checked?
-//        boolean checked = ((RadioButton) view).isChecked();
-//
-//        // Check which radio button was clicked
-//        switch(view.getId()) {
-//            case R.id.radio_spender:
-//                if (checked)
-//                    // Big Spender
-//                    break;
-//            case R.id.radio_saving:
-//                if (checked)
-//                    // Saving mode
-//                    break;
-//        }
-//    }
+
 }
 
