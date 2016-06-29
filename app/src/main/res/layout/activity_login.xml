@@ -9,22 +9,16 @@
               android:paddingRight="@dimen/activity_horizontal_margin"
               android:paddingTop="@dimen/activity_vertical_margin"
               android:textColor="#FFFFFF"
-              android:background="@drawable/v"
+              android:background="@color/green1"
               tools:context="no.tipps.tipps.LoginActivity">
 
     <!-- Login progress -->
-    <ProgressBar
-            android:id="@+id/login_progress"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:visibility="gone"/>
 
-    <ScrollView
-            android:id="@+id/login_form"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <ImageView
+            android:layout_width="85dp"
+            android:layout_height="31dp"
+            android:background="@drawable/vippslogo"
+            android:layout_centerHorizontal="true"/>
 
         <LinearLayout
                 android:id="@+id/email_login_form"
@@ -34,14 +28,14 @@
 
             <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
 
                 <AutoCompleteTextView
-                        android:id="@+id/email"
+                        android:id="@+id/name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_name"
-                        android:inputType="textEmailAddress"
                         android:textColor="#FFFFFF"
                         android:maxLines="1"
                         android:singleLine="true"/>
@@ -52,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/intro"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="20dp"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold"
                     android:textSize="24dp"/>
@@ -62,6 +56,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                 <RadioButton android:id="@+id/radio_spender"
                              android:textColor="#FFFFFF"
                              android:layout_width="wrap_content"
@@ -71,6 +66,7 @@
                              android:textSize="20dp"
                              android:layout_marginLeft="20dp"
                              android:checked="true"/>
+
                 <RadioButton android:id="@+id/radio_saving"
                              android:textColor="#FFFFFF"
                              android:layout_width="wrap_content"
@@ -82,8 +78,6 @@
                              android:text="@string/savingMode"/>
             </RadioGroup>
 
-
-
             <Button
                     android:id="@+id/email_sign_in_button"
                     style="?android:textAppearanceSmall"
@@ -93,11 +87,7 @@
                     android:background="#2F2F2F"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold"
-                    android:layout_marginTop="50dp"
-                    android:layout_gravity="center_horizontal|bottom"/>
-
-
-
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"/>
         </LinearLayout>
-    </ScrollView>
 </LinearLayout>
