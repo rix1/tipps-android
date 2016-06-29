@@ -17,9 +17,12 @@ import android.widget.Button;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Random;
 
 public class PaymentActivity extends AppCompatActivity {
 
+    private static final String APP_ID = "c4c49550-5def-4c5e-972d-e78ecd1fc2c8";
+    private static final int MERCHANT_SERIAL_NUMBER = 24815;
     private Button payBtn;
     private final String TAG = PaymentActivity.class.getSimpleName();
 
@@ -44,29 +47,11 @@ public class PaymentActivity extends AppCompatActivity {
         });
     }
 
-    // DEPRECATED
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        Log.d(TAG, "RECEIVED SOMETHING FROM TIPPS??? ON NEW INTENT?");
-        String url = null;
-        if (intent != null && intent.getData() != null) {
-            try{
-                url = URLDecoder.decode(intent.getData().toString(),"UTF-8");
-                Log.d(TAG, "Data: " + url);
-                //TODO Handle result
-            }catch(UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         Log.d(TAG, "RECEIVED SOMETHING FROM VIPPS! requestCode: " + requestCode + " resCode: " + resultCode);
-        Log.d(TAG, intent.toString());
+//        Log.d(TAG, intent.toString());
 
         if(resultCode == RESULT_OK) {
             String url = null;
@@ -94,28 +79,11 @@ public class PaymentActivity extends AppCompatActivity {
             Log.d(TAG, info.toString());
 
             if (versionCompare(info.versionName, "1.4.0") >= 0) {
-                String uri = "vipps://?action=inAppPayment&appID=c4c49550-5def-4c5e-972d-e78ecd1fc2c8&orderID=14&amount=100&merchantSerialNumber=24815&fallbackURL=tipps://&message=TestMessage";
-
-//                String uri = "vipps://?action=inAppPayment&appID=c4c49550-5def-4c5e-972d-e78ecd1fc2c8&orderID=14&amount=100&merchantSerialNumber=24815&fallbackURL=INTENT";
-
-//                String encodedUrl = URLEncoder.encode(uri, "UTF-8");
-
+                Uri uri = getVippsUri("tipps://&message=TestMessage&data=Hei", 100);
                 Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(uri);
 
-                intent.setData(Uri.parse(uri));
-
-//                intent.setPackage("no.dnb.vipps"); // Avoids application picker
-
-                Log.d(TAG, "STARTING VIPPS WITH DATA: " + intent.getData());
-                Log.d(TAG, "URI: " + uri);
-                Log.d(TAG, "URI PARSED: " + Uri.parse(uri));
-//                Log.d(TAG, "URI Encoded: " + encodedUrl);
-//                Log.d(TAG, "ENCODED URI PARSED: " + Uri.parse(encodedUrl));
-                Log.d(TAG, "Intent: " + intent.toString());
-
-                startActivity(intent); //Approach 1 explain below OR
-
-//                startActivityForResult(launchIntent, REQUEST_CODE);
+                startActivity(intent);
 
             } else {
                 // Notify user to download the latest version of Vipps application.
@@ -129,6 +97,12 @@ public class PaymentActivity extends AppCompatActivity {
             storeIntent.setData(Uri.parse(url));
             startActivity(storeIntent);
         }
+    }
+
+    private Uri getVippsUri(String fallbackurl, int amount){
+        int orderID = new Random().nextInt(1000) + 1;
+        String base = "vipps://?action=inAppPayment&appID="+ APP_ID + "&orderID=" + orderID + "&amount="+ amount +"&merchantSerialNumber="+MERCHANT_SERIAL_NUMBER+"&fallbackURL="+fallbackurl;
+        return Uri.parse(base);
     }
 
     private Integer versionCompare(String str1, String str2) {
