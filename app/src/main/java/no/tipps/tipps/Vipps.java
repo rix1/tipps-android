@@ -6,13 +6,12 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
@@ -23,13 +22,11 @@ import java.util.UUID;
 public class Vipps extends AppCompatActivity {
 
     private BeaconManager beaconManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vipps);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        showTipps();
 
         beaconManager = new BeaconManager(getApplicationContext());
 
@@ -59,17 +56,6 @@ public class Vipps extends AppCompatActivity {
                 ));
             }
         });
-
-
-        // Floating button with email icon
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     public void showNotification(String title, String message) {
@@ -90,15 +76,23 @@ public class Vipps extends AppCompatActivity {
         notificationManager.notify(1, notification);
     }
 
-    public void showTipps(){
-        ImageButton showTippsButton= (ImageButton) findViewById(R.id.showTipps);
+    private boolean showTipps = false;
+
+    private void showTipps(){
+        final CoordinatorLayout background = (CoordinatorLayout) findViewById(R.id.background);
+        ImageButton showTippsButton= (ImageButton) findViewById(R.id.tippsButton);
+
         showTippsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("Vipps", "hey");
+                if (!showTipps) {
+                    background.setBackgroundResource(R.drawable.borsbarentippser);
+                    showTipps = true;
+                }else{
+                    background.setBackgroundResource(R.drawable.vippsbackground);
+                    showTipps = false;
+                }
             }
         });
     }
-
-
 }
