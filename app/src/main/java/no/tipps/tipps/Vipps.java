@@ -44,7 +44,6 @@ public class Vipps extends AppCompatActivity {
         mBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this);
 
 
-
         showTipps();
 
         beaconManager = new BeaconManager(getApplicationContext());
@@ -63,7 +62,7 @@ public class Vipps extends AppCompatActivity {
             @Override
             public void onExitedRegion(Region region) {
                 Log.d(TAG, "EXITING REGION");
-                showNotification("Tilbudet er ferdig!","Nothing in range....");
+                showNotification("Tilbudet er ferdig!", "Nothing in range....");
             }
         });
 
@@ -78,6 +77,7 @@ public class Vipps extends AppCompatActivity {
                 ));
             }
         });
+    }
 
 
 //        // Floating button with email icon
@@ -93,10 +93,6 @@ public class Vipps extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
-    }
-
-
-
 
     @Override
     protected void onNewIntent(Intent intent) {
