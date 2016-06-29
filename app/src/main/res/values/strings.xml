@@ -16,7 +16,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="title_activity_vipps">Vipps</string>
     <string name="username">Halvor Lande</string>
-    <string name="confirmText">Takk for kjøpet, og at du brukte</string>
+    <string name="confirmText">Takk for at du brukte</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

@@ -28,6 +28,13 @@
                 android:label="@string/title_activity_vipps"
                 android:launchMode="singleInstance"
                 android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".PaymentActivity"
+                android:label="@string/title_activity_payment"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".ConfirmActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
 
@@ -36,15 +43,6 @@
 
                 <data android:scheme="tipps"/>
             </intent-filter>
-        </activity>
-        <activity
-                android:name=".PaymentActivity"
-                android:label="@string/title_activity_payment"
-                android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name=".ConfirmActivity"
-                  android:theme="@style/AppTheme.NoActionBar">
-
         </activity>
     </application>
 
