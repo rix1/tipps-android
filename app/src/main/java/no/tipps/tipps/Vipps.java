@@ -16,6 +16,8 @@ import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.UUID;
 
@@ -55,8 +57,8 @@ public class Vipps extends AppCompatActivity {
                 beaconManager.startMonitoring(new Region(
                         "office region",
                         UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"),
-                        53168,
-                        9502
+                        58865,
+                        34307
                 ));
             }
         });
@@ -69,9 +71,30 @@ public class Vipps extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                Intent intent = new Intent(getApplicationContext(), PaymentActivity.class);
+                startActivity(intent);
             }
         });
     }
+
+    // DEPRECATED
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.d(TAG, "RECEIVED SOMETHING FROM TIPPS?");
+        String url = null;
+        if (intent != null && intent.getData() != null) {
+            try{
+                url = URLDecoder.decode(intent.getData().toString(),"UTF-8");
+                Log.d(TAG, "Data: " + url);
+                //TODO Handle result
+            }catch(UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     public void showNotification(String title, String message) {
         Intent notifyIntent = new Intent(this, LoginActivity.class);

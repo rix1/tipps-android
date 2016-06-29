@@ -25,6 +25,21 @@
         <activity
                 android:name=".Vipps"
                 android:label="@string/title_activity_vipps"
+                android:theme="@style/AppTheme.NoActionBar"
+                android:launchMode="singleInstance">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tipps" />
+            </intent-filter>
+
+
+        </activity>
+        <activity
+                android:name=".PaymentActivity"
+                android:label="@string/title_activity_payment"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
