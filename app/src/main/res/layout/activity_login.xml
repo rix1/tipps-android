@@ -8,7 +8,8 @@
               android:paddingLeft="@dimen/activity_horizontal_margin"
               android:paddingRight="@dimen/activity_horizontal_margin"
               android:paddingTop="@dimen/activity_vertical_margin"
-              android:background="@color/vippsColor"
+              android:textColor="#2F2F2F"
+              android:background="#D3D3D3"
               tools:context="no.tipps.tipps.LoginActivity">
 
     <!-- Login progress -->
@@ -24,36 +25,13 @@
             android:id="@+id/login_form"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/vippsColor">
+            android:background="#D3D3D3">
 
         <LinearLayout
                 android:id="@+id/email_login_form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/intro"
-                    android:layout_marginTop="50dp"
-                    android:textSize="24dp"/>
-
-            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:id="@+id/radio"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                <RadioButton android:id="@+id/radio_spender"
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:text="@string/bigSpender"
-                             android:checked="true"/>
-                <RadioButton android:id="@+id/radio_saving"
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:text="@string/savingMode"/>
-            </RadioGroup>
 
             <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -63,13 +41,47 @@
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="150dp"
                         android:hint="@string/prompt_name"
                         android:inputType="textEmailAddress"
+                        android:textColor="#FFFFFF"
                         android:maxLines="1"
                         android:singleLine="true"/>
 
             </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/intro"
+                    android:layout_marginTop="50dp"
+                    android:textColor="#2F2F2F"
+                    android:textStyle="bold"
+                    android:textSize="24dp"/>
+
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/radio"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                <RadioButton android:id="@+id/radio_spender"
+                             android:textColor="#2F2F2F"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:text="@string/bigSpender"
+                             android:layout_marginTop="20dp"
+                             android:textSize="20dp"
+                             android:checked="true"/>
+                <RadioButton android:id="@+id/radio_saving"
+                             android:textColor="#2F2F2F"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_marginTop="20dp"
+                             android:layout_marginBottom="100dp"
+                             android:textSize="20dp"
+                             android:text="@string/savingMode"/>
+            </RadioGroup>
+
+
 
             <Button
                     android:id="@+id/email_sign_in_button"
@@ -77,6 +89,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/action_sign_in"
+                    android:background="#2F2F2F"
+                    android:textColor="#FFFFFF"
                     android:textStyle="bold"
                     android:layout_marginTop="50dp"
                     android:layout_gravity="center_horizontal|bottom"/>

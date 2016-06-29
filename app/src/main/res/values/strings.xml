@@ -7,7 +7,7 @@
     <string name="action_sign_in"> Register </string>
     <string name="bigSpender">Big Spender</string>
     <string name="savingMode">Sparemodus</string>
-    <string name="intro">Hvilket modus føler du deg i?</string>
+    <string name="intro">Hvilken modus føler du deg i?</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
