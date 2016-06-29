@@ -31,7 +31,6 @@ public class Vipps extends AppCompatActivity {
     //    private NotificationManager notificationManager;
     private int notificationID = 1;
 
-
     private NotificationManager notificationManager;
     private NotificationCompat.Builder mBuilder;
 
@@ -110,6 +109,12 @@ public class Vipps extends AppCompatActivity {
         }
     }
 
+    public void stopNotification(){
+        mBuilder.setOngoing(false);
+
+        notificationManager.cancel(notificationID);
+
+    }
 
     public void showNotification(String title, String message) {
         Intent notifyIntent = new Intent(this, LoginActivity.class);
@@ -128,7 +133,7 @@ public class Vipps extends AppCompatActivity {
                 .setContentText(message)
                 .setOngoing(true)
                 .setOnlyAlertOnce(true)
-                .setAutoCancel(false)
+                .setAutoCancel(true)
                 .addAction(android.R.drawable.stat_notify_sync, "Kjøp dette Tippset", pendingVipps);
 
         mBuilder.setContentIntent(pendingIntent);
@@ -153,6 +158,7 @@ public class Vipps extends AppCompatActivity {
         showTippsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                stopNotification();
                 if (!showTipps) {
                     background.setBackgroundResource(R.drawable.borsbarentippser1);
                     showTipps = true;
