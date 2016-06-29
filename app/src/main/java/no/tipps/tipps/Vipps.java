@@ -50,7 +50,7 @@ public class Vipps extends AppCompatActivity {
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
 
-        beaconManager.setBackgroundScanPeriod(1250, 250);
+        beaconManager.setBackgroundScanPeriod(1550, 550);
 
         beaconManager.setMonitoringListener(new BeaconManager.MonitoringListener() {
             @Override
