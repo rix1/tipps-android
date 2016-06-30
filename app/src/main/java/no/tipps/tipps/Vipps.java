@@ -164,7 +164,6 @@ public class Vipps extends AppCompatActivity {
 
                 overridePendingTransition(R.anim.enter, R.anim.exit);
 
-
             }
         });
     }
