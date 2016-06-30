@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
@@ -28,6 +29,8 @@ public class Vipps extends AppCompatActivity {
 
     private BeaconManager beaconManager;
     private final String TAG = Vipps.class.getSimpleName();
+    private String name;
+    private TextView nameView;
     //    private NotificationManager notificationManager;
     private int notificationID = 1;
 
@@ -50,6 +53,13 @@ public class Vipps extends AppCompatActivity {
 
 
         beaconManager.setBackgroundScanPeriod(1550, 550);
+
+        name = getIntent().getStringExtra("name");
+
+
+
+        nameView = (TextView)findViewById(R.id.name);
+        nameView.setText(name);
 
         beaconManager.setMonitoringListener(new BeaconManager.MonitoringListener() {
             @Override
@@ -77,8 +87,6 @@ public class Vipps extends AppCompatActivity {
             }
         });
     }
-
-
 //        // Floating button with email icon
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //
