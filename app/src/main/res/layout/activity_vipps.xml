@@ -6,50 +6,30 @@
         android:layout_height="fill_parent"
         android:fitsSystemWindows="true"
         tools:context="no.tipps.tipps.Vipps"
-        android:id="@+id/background"
-        android:background="@drawable/vippsbackground">
+        android:id="@+id/background">
+        <!--android:background="@drawable/vippsbackground">-->
 
-    <ImageView
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/app_bar_height"
-            android:background="@color/green1"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@android:color/darker_gray"
+            >
 
-    <ImageView
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:background="@drawable/profilepic"
-            android:layout_marginTop="70dp"
-            android:layout_marginStart="150dp"/>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@color/dnb_seagreen"
+                android:id="@+id/topPanel"
+                >
+        </RelativeLayout>
 
-    <ImageView
-            android:layout_width="85dp"
-            android:layout_height="31dp"
-            android:background="@drawable/vippslogo"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="150dp"/>
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <ImageView
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:background="@drawable/cogwheel"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"/>
+        </ScrollView>
 
-    <TextView
-            android:text="@string/username"
-            android:layout_width="200dp"
-            android:layout_height="20dp"
-            android:textColor="#fff"
-            android:textStyle="bold"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="170dp"/>
+        </LinearLayout>
 
-    <ImageButton
-            android:id="@+id/tippsButton"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:layout_gravity="top|end"
-            android:layout_marginEnd="18dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/tipps"/>
 </android.support.design.widget.CoordinatorLayout>
