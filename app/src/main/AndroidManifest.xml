@@ -9,7 +9,7 @@
 
     <application
             android:allowBackup="true"
-            android:icon="@drawable/notificationlogo"
+            android:icon="@drawable/vippslogoicon"
             android:label="@string/app_name"
             android:largeHeap="true"
             android:supportsRtl="true"
