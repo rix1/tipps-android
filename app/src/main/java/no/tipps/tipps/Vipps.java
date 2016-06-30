@@ -3,6 +3,7 @@ package no.tipps.tipps;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -146,27 +147,24 @@ public class Vipps extends AppCompatActivity {
 
     }
 
-    private boolean showTipps = false;
-
     private void showTipps(){
 
 //        notificationManager.notify(notificationID, new );
 //        notificationManager.getActiveNotifications()
 
 
-        final CoordinatorLayout background = (CoordinatorLayout) findViewById(R.id.background);
         ImageButton showTippsButton= (ImageButton) findViewById(R.id.tippsButton);
 
         showTippsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!showTipps) {
-                    background.setBackgroundResource(R.drawable.borsbarentippser1);
-                    showTipps = true;
-                }else{
-                    background.setBackgroundResource(R.drawable.vippsbackground);
-                    showTipps = false;
-                }
+
+                Intent i = new Intent(getApplicationContext(), TippsActivity.class);
+                startActivity(i);
+
+                overridePendingTransition(R.anim.enter, R.anim.exit);
+
+
             }
         });
     }
