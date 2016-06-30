@@ -1,21 +1,17 @@
 package no.tipps.tipps;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
@@ -32,7 +28,6 @@ import im.delight.android.ddp.db.memory.InMemoryDatabase;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -40,7 +35,7 @@ import java.util.UUID;
 public class Vipps extends AppCompatActivity implements MeteorCallback {
 
     private static final int ENDPOINT_PORT = 3000;
-    private static final String ENDPOINT_IP = "129.241.221.171";
+    private static final String ENDPOINT_IP = "129.241.220.193";
     private final String TAG = Vipps.class.getSimpleName();
 
     private BeaconManager beaconManager;
@@ -94,7 +89,7 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
         resultListener = new ResultListener() {
             @Override
             public void onSuccess(String s) {
-                Log.d(TAG, "DDP: msg received, res: " + s);
+                Log.d("METEOR", "DDP: msg received, res: " + s);
 
                 Snackbar snackbar = Snackbar
                         .make(coordinatorLayout, "Tipps.no says: " + s, Snackbar.LENGTH_SHORT);
@@ -103,7 +98,7 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
 
             @Override
             public void onError(String s, String s1, String s2) {
-                Log.d(TAG, "DDP error " + s);
+                Log.d("METEOR", "DDP error " + s);
 //                mMeteor.reconnect();
                 Snackbar snackbar = Snackbar
                         .make(coordinatorLayout, "Meteor error..", Snackbar.LENGTH_LONG);
@@ -135,22 +130,23 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
 //                Log.d("GUNNAR", doc.getField("macAddress").toString());
 //                doc.
 //                Document doc = database.getCollection("Beacon").
-                Document doc =  mMeteor.getDatabase().getCollection("Beacons").findOne();
-//                query.toString();
+//                 Object obj = mMeteor.getDatabase().getCollection("Beacons").getDocument("bSZWnxLu3BuHi7Cug").getField("macAddress");
 
 
+                Query query= mMeteor.getDatabase().getCollection("Beacons").whereEqual("macAddress", list.get(0).getMacAddress().toStandardString());
 
                 if (!list.isEmpty()) {
                     Beacon nearestBeacon = list.get(0);
-                    if(!doc.equals(null)) {
+
+                    if(query == null){
+                        Log.d("SIRI", "OBJECT IS NULL");
+                        notificationManager.cancel(notificationID);
+                    }else{
+//                        Log.d("SIRI", query.toString());
+                        Document doc = query.findOne();
+//                        say(list.get(0).getMacAddress() + " near!", Snackbar.LENGTH_SHORT);
                         showNotification(doc.getField("title").toString(), doc.getField("message").toString(), Integer.parseInt(doc.getField("price").toString()));
                     }
-
-//                    database.getCollection();
-//                    List<String> places = placesNearBeacon(nearestBeacon);
-
-//                        say(list.get(0).getMacAddress() + " near!", Snackbar.LENGTH_SHORT);
-
                     // TODO: update the UI here
 //                    Log.d("Airport", "Nearest places: " + places);
                 }
@@ -162,9 +158,6 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
     }
 
     private Beacon getBeaconByMAC(String macAddress){
-
-
-
         return null;
     }
 
@@ -203,7 +196,9 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
     }
 
     private String getEndpointURL(String ip, int port){
-        return "ws://" + ip + ":" + port + "/websocket";
+        String url = "ws://" + ip + ":" + port + "/websocket";
+        Log.d("METEOR", "Endpoint URL: "+ url);
+        return url;
     }
 
     @Override
@@ -268,7 +263,7 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
     }
 
     public void showNotification(String title, String message, int price) {
-        Intent notifyIntent = new Intent(this, LoginActivity.class);
+        Intent notifyIntent = new Intent(this, TippsActivity.class);
         notifyIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
         mBuilder = null;
@@ -293,8 +288,6 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
 
         mBuilder.setContentIntent(pendingIntent);
 
-//        mBuilder.defaults |= Notification.PRIORITY_HIGH;
-
         notificationManager.notify(notificationID, mBuilder.build());
 
     }
@@ -316,8 +309,6 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
                 startActivity(i);
 
                 overridePendingTransition(R.anim.enter, R.anim.exit);
-
-
             }
         });
     }
@@ -325,7 +316,7 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
     @Override
     public void onConnect(boolean signedInAutomatically) {
 
-        Log.d(TAG, "Connected to tipps.no");
+        Log.d("METEOR", "Connected to tipps.no");
 
         String subscriptionId = mMeteor.subscribe("beacons");
 
@@ -351,9 +342,9 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
 
     @Override
     public void onDisconnect() {
-
-        Snackbar snackbar = Snackbar
-                .make(coordinatorLayout, "Meteor disconnected", Snackbar.LENGTH_LONG)
+        Log.d("METEOR", "Meteor disconnected...");
+        final Snackbar snackbar = Snackbar
+                .make(coordinatorLayout, "Meteor disconnected", Snackbar.LENGTH_INDEFINITE)
                 .setAction("Reconnect", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -363,6 +354,14 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
                     }
                 });
 
+
+        snackbar.setAction("Dismiss", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                snackbar.dismiss();
+            }
+        });
+
         snackbar.show();
 
     }
@@ -370,6 +369,7 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
     @Override
     public void onException(Exception e) {
 
+        Log.d("METEOR", "onException: " + e.toString());
     }
 
     /**
