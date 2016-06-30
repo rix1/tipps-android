@@ -21,7 +21,7 @@ public class User {
     }
 
     public User(String name, int profile){
-        this.name = name;
+        this.name = toTitleCase(name);
         this.profile = profile;
     }
 
@@ -31,5 +31,9 @@ public class User {
 
     public int getProfile() {
         return profile;
+    }
+
+    private String toTitleCase(String s){
+        return s.toUpperCase(); // // TODO: 30/06/16 Implement title case? 
     }
 }
