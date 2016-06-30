@@ -131,7 +131,7 @@ public class Vipps extends AppCompatActivity {
         Intent vipps = PaymentHelper.initiatePayment(this, price);
         PendingIntent pendingVipps = PendingIntent.getActivities(this, 0, new Intent[]{vipps}, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        mBuilder.setSmallIcon(android.R.drawable.ic_dialog_info)
+        mBuilder.setSmallIcon(R.drawable.smallnot)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setOngoing(true)

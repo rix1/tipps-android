@@ -18,14 +18,13 @@ public class ConfirmActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_confirm);
         ImageButton exitButton = (ImageButton) findViewById(R.id.confirmExitButton);
-
         exitButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 Log.i("clicks", "You Clicked exit");
                 Intent i = new Intent(ConfirmActivity.this, Vipps.class);
                 startActivity(i);
+                overridePendingTransition(R.anim.enter, R.anim.exit);
                 finish();
             }
         });
