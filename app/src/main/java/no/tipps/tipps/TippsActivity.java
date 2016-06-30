@@ -31,8 +31,6 @@ public class TippsActivity extends AppCompatActivity {
         });
     }
 
-
-
     @Override
     public void onBackPressed(){
         super.onBackPressed();
