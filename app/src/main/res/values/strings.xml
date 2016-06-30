@@ -4,12 +4,23 @@
     <!-- Strings related to login -->
     <string name="prompt_name">Navn</string>
     <string name="action_sign_in">Ferdig</string>
+
+    <string name="prompt_password">Password (optional)</string>
+
     <string name="bigSpender">Big Spender</string>
     <string name="savingMode">Sparemodus</string>
     <string name="intro">Hvilken modus føler du deg i?</string>
     <string name="title_activity_vipps">Vipps</string>
     <string name="username">Halvor Lande</string>
+
+
+    <string name="confirmText">Takk for at du brukte</string>
+ 
     <string name="action_settings">Settings</string>
     <string name="title_activity_payment">PaymentActivity</string>
     <string name="buySomething">Click button to perform payment</string>
+
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
