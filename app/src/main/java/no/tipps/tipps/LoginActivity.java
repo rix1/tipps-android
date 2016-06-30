@@ -103,6 +103,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         Intent intent = new Intent(this, Vipps.class);
         intent.putExtra("name", mNameView.getEditableText().toString());
         startActivity(intent);
+        finish();
     }
 
     @Override

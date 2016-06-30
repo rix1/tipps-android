@@ -26,6 +26,7 @@ public class ConfirmActivity extends AppCompatActivity {
                 Log.i("clicks", "You Clicked exit");
                 Intent i = new Intent(ConfirmActivity.this, Vipps.class);
                 startActivity(i);
+                finish();
             }
         });
     }
