@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import static no.tipps.tipps.R.drawable.tipps;
+
 public class TippsActivity extends AppCompatActivity {
 
     @Override
@@ -16,6 +18,9 @@ public class TippsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -24,5 +29,14 @@ public class TippsActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        overridePendingTransition(R.anim.enter_left, R.anim.exit_right);
+        finish();
     }
 }
