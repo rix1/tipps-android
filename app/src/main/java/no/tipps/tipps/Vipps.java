@@ -81,8 +81,8 @@ public class Vipps extends AppCompatActivity {
                 beaconManager.startMonitoring(new Region(
                         "office region",
                         UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"),
-                        58865,
-                        34307
+                        53168,  // Major
+                        9502    // Minor
                 ));
             }
         });
