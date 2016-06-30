@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
@@ -27,6 +28,8 @@ public class Vipps extends AppCompatActivity {
 
     private BeaconManager beaconManager;
     private final String TAG = Vipps.class.getSimpleName();
+    private String name;
+    private TextView nameView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,13 @@ public class Vipps extends AppCompatActivity {
         showTipps();
 
         beaconManager = new BeaconManager(getApplicationContext());
+
+        name = getIntent().getStringExtra("name");
+
+
+
+        nameView = (TextView)findViewById(R.id.name);
+        nameView.setText(name);
 
         beaconManager.setMonitoringListener(new BeaconManager.MonitoringListener() {
             @Override

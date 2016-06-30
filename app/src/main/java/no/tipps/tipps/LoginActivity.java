@@ -15,6 +15,7 @@ import android.provider.ContactsContract;
 
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -60,6 +61,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Set up the login form.
         mNameView = (AutoCompleteTextView) findViewById(R.id.name);
 
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
+
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
 
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -97,6 +101,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private void startVipps(){
         Intent intent = new Intent(this, Vipps.class);
+        intent.putExtra("name", mNameView.getEditableText().toString());
         startActivity(intent);
     }
 

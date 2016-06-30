@@ -20,74 +20,85 @@
             android:background="@drawable/vippslogo"
             android:layout_centerHorizontal="true"/>
 
-        <LinearLayout
-                android:id="@+id/email_login_form"
+    <RelativeLayout
+            android:id="@+id/email_login_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+                android:id="@+id/name_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="20dp">
 
-            <android.support.design.widget.TextInputLayout
+            <AutoCompleteTextView
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp">
-
-                <AutoCompleteTextView
-                        android:id="@+id/name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/prompt_name"
-                        android:textColor="#FFFFFF"
-                        android:maxLines="1"
-                        android:singleLine="true"/>
-
-            </android.support.design.widget.TextInputLayout>
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/intro"
-                    android:layout_marginTop="20dp"
+                    android:hint="@string/prompt_name"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:textSize="24dp"/>
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:imeOptions="actionDone"
+            />
 
-            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:id="@+id/radio"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+        </android.support.design.widget.TextInputLayout>
 
-                <RadioButton android:id="@+id/radio_spender"
-                             android:textColor="#FFFFFF"
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:text="@string/bigSpender"
-                             android:layout_marginTop="20dp"
-                             android:textSize="20dp"
-                             android:layout_marginLeft="20dp"
-                             android:checked="true"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/intro"
+                android:layout_marginTop="20dp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="24dp"
+                android:id="@+id/login_name"
+                android:layout_below="@id/name_wrapper"
+        />
 
-                <RadioButton android:id="@+id/radio_saving"
-                             android:textColor="#FFFFFF"
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:layout_marginTop="20dp"
-                             android:layout_marginBottom="130dp"
-                             android:textSize="20dp"
-                             android:layout_marginLeft="20dp"
-                             android:text="@string/savingMode"/>
-            </RadioGroup>
-
-            <Button
-                    android:id="@+id/email_sign_in_button"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="match_parent"
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/radio"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/action_sign_in"
-                    android:background="#2F2F2F"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:layout_marginTop="10dp"
-                    android:layout_gravity="center_horizontal"/>
-        </LinearLayout>
+                    android:orientation="vertical"
+                    android:layout_below="@id/login_name"
+                    android:layout_marginTop="40dp"
+        >
+
+            <RadioButton android:id="@+id/radio_spender"
+                         android:textColor="#FFFFFF"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="@string/bigSpender"
+                         android:layout_marginTop="20dp"
+                         android:textSize="20dp"
+                         android:layout_marginLeft="20dp"
+                         android:checked="true"/>
+
+            <RadioButton android:id="@+id/radio_saving"
+                         android:textColor="#FFFFFF"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginTop="20dp"
+                         android:layout_marginBottom="130dp"
+                         android:textSize="20dp"
+                         android:layout_marginLeft="20dp"
+                         android:text="@string/savingMode"/>
+        </RadioGroup>
+
+        <Button
+                android:id="@+id/email_sign_in_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/action_sign_in"
+                android:background="#2F2F2F"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentBottom="true"
+        />
+    </RelativeLayout>
 </LinearLayout>
