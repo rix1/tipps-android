@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -102,6 +103,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private void startVipps(){
         Intent intent = new Intent(this, Vipps.class);
         intent.putExtra("name", mNameView.getEditableText().toString());
+
+        RadioGroup rg = (RadioGroup)findViewById(R.id.radio);
+        RadioButton btn = (RadioButton)findViewById(rg.getCheckedRadioButtonId());
+
+        int profile = btn.getText().equals(R.string.bigSpender) ? User.USER_PROFILE_BIG_SPENDER : User.USER_PROFILE_CHEAP;
+        intent.putExtra("profile", profile);
+
         startActivity(intent);
         finish();
     }
