@@ -52,5 +52,6 @@
             android:layout_gravity="top|end"
             android:layout_marginEnd="18dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/tipps"/>
+            android:background="@drawable/tipps"
+            />
 </android.support.design.widget.CoordinatorLayout>
