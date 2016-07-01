@@ -145,45 +145,64 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
                     if (mMeteor.isConnected() && !list.isEmpty()) { // Server is connected and beacons are nearby
                         Beacon newBeacon = list.get(0);
 
-//                        if(first){
-//                            currentBeacon = newBeacon;
-//                            first = false;
-//                        }
+                        query = mMeteor.getDatabase().getCollection("beacons").whereEqual("macAddress", newBeacon.getMacAddress().toStandardString());
 
-                        if (newBeacon.getMacAddress() != currentBeacon.getMacAddress()){
-                            beaconChange = true;
-                            Log.d("SIRI_UPDATE", "Beacon has been updated");
-                        }
-
-                        query = mMeteor.getDatabase().getCollection("beacons").whereEqual("macAddress", currentBeacon.getMacAddress().toStandardString());
 
                         if(query.toString().length() <= 2){   // There are no beacons matching the ones from the server
                             Log.d("QUERY", "OBJECT IS NULL");
                             notificationManager.cancel(notificationID);
-                        }else{                                // Beacons from server are recognized
-                            Log.d("SIRI", query.toString());
+                        }else{
                             Document doc = query.findOne();
+                            currentTipps = new SingleTipps(doc.getField("title").toString(), doc.getField("message").toString(), doc.getField("price").toString());
 
-                            // Get the Tipps accosiated with this beacon.
-                            if(currentTipps.isSet() && beaconChange){
-                                currentTipps = new SingleTipps(doc.getField("title").toString(), doc.getField("message").toString(), doc.getField("price").toString());
-                            }else if(!currentTipps.isSet()){
-                                currentTipps = new SingleTipps(doc.getField("title").toString(), doc.getField("message").toString(), doc.getField("price").toString());
-                            }
-//                            showNotification(doc.getField("title").toString(), doc.getField("message").toString(), Integer.parseInt(doc.getField("price").toString()));
-                        }
-                    }
-                    else{
-                        Log.d("METEOR", "Meteor conection: "+  mMeteor.isConnected());
-                        notificationManager.cancel(notificationID);
-                    }
-                    if(list.isEmpty()){
-                        notificationManager.cancel(notificationID);
-                        currentTipps = new SingleTipps("Tomt Tipps", "Her har det skjedd noe feil", "0"); // There are no beacons, hence no tipps.
-                    }else{
-                        if(currentTipps.isSet()){
                             showNotification(currentTipps.getTitle(), currentTipps.getMessage(), currentTipps.getPrice());
+
                         }
+
+
+//                        -------------------------------------
+//
+//                        if(first){
+//                            currentBeacon = list.get(0);
+//                            first = false;
+//                            beaconChange = true;
+//                        }
+//
+//                        if (newBeacon.getMacAddress() != currentBeacon.getMacAddress()){
+//                            beaconChange = true;
+//                            Log.d("SIRI_UPDATE", "Beacon has been updated");
+//                        }
+//
+//
+//                        if(query.toString().length() <= 2){   // There are no beacons matching the ones from the server
+//                            Log.d("QUERY", "OBJECT IS NULL");
+//                            notificationManager.cancel(notificationID);
+//                        }else{                                // Beacons from server are recognized
+//                            Log.d("SIRI", query.toString());
+//                            Document doc = query.findOne();
+//
+//                            // Get the Tipps accosiated with this beacon.
+//                            if(beaconChange){
+//                                currentTipps = new SingleTipps(doc.getField("title").toString(), doc.getField("message").toString(), doc.getField("price").toString());
+//                            }
+//
+//                            if(!currentTipps.isSet()){
+//                                currentTipps = new SingleTipps(doc.getField("title").toString(), doc.getField("message").toString(), doc.getField("price").toString());
+//                            }
+////                            showNotification(doc.getField("title").toString(), doc.getField("message").toString(), Integer.parseInt(doc.getField("price").toString()));
+//                        }
+//                    }
+//                    else{
+//                        Log.d("METEOR", "Meteor conection: "+  mMeteor.isConnected());
+//                        notificationManager.cancel(notificationID);
+//                    }
+//                    if(list.isEmpty()){
+//                        notificationManager.cancel(notificationID);
+//                        currentTipps = new SingleTipps("Tomt Tipps", "Her har det skjedd noe feil", "0"); // There are no beacons, hence no tipps.
+//                    }else{
+//                        if(currentTipps.isSet()){
+//                            showNotification(currentTipps.getTitle(), currentTipps.getMessage(), currentTipps.getPrice());
+//                        }
                     }
                 }
 
