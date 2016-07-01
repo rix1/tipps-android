@@ -54,7 +54,6 @@ public class PaymentHelper {
         return null;
     }
 
-
     /**
      * Generates and returns a Vipps "deep-link" Uri. Converts the price/amount to "øre".
      * @param fallbackurl

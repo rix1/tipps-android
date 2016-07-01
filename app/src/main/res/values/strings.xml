@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tipps by DNB</string>
+    <string name="app_name">Tipps\nby DNB</string>
 
     <!-- Strings related to login -->
     <string name="prompt_name">Navn</string>
@@ -28,15 +28,15 @@
 
     <string name="large_text">
         "FISKEBODEN\n\n"
+        "Hysefilet med ristet sopp og potetpure eller Fiskeburger med hummermajones, potetbåter og råkost\n"
+        "Pris 50,-\n\n"
 
-        "Laks og pasta - 45kr.\n\n"
+        "KJØTTBODEN\n\n"
+        "Koreansk wok med svinekjøtt, marinert kål og tomatris eller Lasagne classico\n"
+        "Pris 57,-\n\n"
 
-        "KJØTTBODEN.\n\n"
-
-        "Laks og pasta - 45kr.\n\n"
-
-        "SALATBODEN.\n\n"
-
-        "Laks og pasta - 45kr.\n\n"
+        "SALATBODEN\n\n"
+        "Tomatsuppe med kyllingkjøtt, bønner og mais eller Urtesuppe(vegetar)\n"
+        "Pris 35,-\n\n"
     </string>
 </resources>
