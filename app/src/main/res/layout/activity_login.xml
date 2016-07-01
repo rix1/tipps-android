@@ -36,7 +36,7 @@
                 android:textColor="#FFFFFF"
 
                 android:textSize="18sp"
-                android:textAlignment="center"
+                android:layout_marginStart="50dp"
                 android:id="@+id/login_name"
                 />
 
@@ -55,7 +55,7 @@
                          android:layout_height="wrap_content"
                          android:text="@string/bigSpender"
                          android:textSize="16sp"
-                         android:layout_marginStart="40dp"
+                         android:layout_marginStart="50dp"
                          android:checked="true"
                     />
 
@@ -66,7 +66,7 @@
                          android:layout_marginTop="15dp"
                          android:layout_marginBottom="130dp"
                          android:textSize="16sp"
-                         android:layout_marginStart="40dp"
+                         android:layout_marginStart="50dp"
                          android:text="@string/savingMode"/>
         </RadioGroup>
 
