@@ -17,6 +17,11 @@ import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 import com.estimote.sdk.SystemRequirementsChecker;
+import com.estimote.sdk.repackaged.gson_v2_3_1.com.google.gson.JsonArray;
+import com.estimote.sdk.repackaged.gson_v2_3_1.com.google.gson.JsonElement;
+import com.estimote.sdk.repackaged.gson_v2_3_1.com.google.gson.JsonObject;
+import com.estimote.sdk.repackaged.gson_v2_3_1.com.google.gson.JsonParser;
+import com.estimote.sdk.repackaged.gson_v2_3_1.com.google.gson.annotations.JsonAdapter;
 import im.delight.android.ddp.Meteor;
 import im.delight.android.ddp.MeteorCallback;
 import im.delight.android.ddp.ResultListener;
@@ -25,12 +30,11 @@ import im.delight.android.ddp.db.Database;
 import im.delight.android.ddp.db.Document;
 import im.delight.android.ddp.db.Query;
 import im.delight.android.ddp.db.memory.InMemoryDatabase;
+import org.json.JSONTokener;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class Vipps extends AppCompatActivity implements MeteorCallback {
 
@@ -49,6 +53,13 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
     private ResultListener resultListener;
     private Region region;
 
+
+    private boolean first;
+
+    private SingleTipps currentTipps;
+    private Beacon currentBeacon;
+
+
     private Beacon[] beacons;
 
     private Database database;
@@ -63,6 +74,9 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.background);
+
+        first = true;
+
 
         showTipps();
         setUpMeteor();
@@ -111,40 +125,65 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
     private void setupBeaconRanger(){
         beaconManager = new BeaconManager(this);
         beaconManager.setBackgroundScanPeriod(1550, 2550);
+        currentTipps = new SingleTipps();
 
         region = new Region("elevator",
                 UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57fe6d"), null, null); // major: 58865 minor: 59405
 
-        final Collection[] beacons = {database.getCollection("Beacon")};
+        final Collection[] beacons = {database.getCollection("beacons")};
 
         beaconManager.setRangingListener(new BeaconManager.RangingListener() {
             @Override
             public void onBeaconsDiscovered(Region region, List<Beacon> list) {
 
-                if(list.size() > 0){
+                Query query;
+                Boolean beaconChange = false;
 
-                    Beacon test = list.get(0);
-                    Log.d("BEACON", "Beacon discovered: " + test.getMacAddress().toStandardString());
-                    Query query= mMeteor.getDatabase().getCollection("Beacons").whereEqual("macAddress", test.getMacAddress().toStandardString());
 
-                    if (mMeteor.isConnected() && !list.isEmpty()) {
-                        Beacon nearestBeacon = list.get(0);
+                if(!list.isEmpty()){
 
-                        if(query == null){
-                            Log.d("SIRI", "OBJECT IS NULL");
+                    if (mMeteor.isConnected() && !list.isEmpty()) { // Server is connected and beacons are nearby
+                        Beacon newBeacon = list.get(0);
+
+//                        if(first){
+//                            currentBeacon = newBeacon;
+//                            first = false;
+//                        }
+
+                        if (newBeacon.getMacAddress() != currentBeacon.getMacAddress()){
+                            beaconChange = true;
+                            Log.d("SIRI_UPDATE", "Beacon has been updated");
+                        }
+
+                        query = mMeteor.getDatabase().getCollection("beacons").whereEqual("macAddress", currentBeacon.getMacAddress().toStandardString());
+
+                        if(query.toString().length() <= 2){   // There are no beacons matching the ones from the server
+                            Log.d("QUERY", "OBJECT IS NULL");
                             notificationManager.cancel(notificationID);
-                        }else{
+                        }else{                                // Beacons from server are recognized
                             Log.d("SIRI", query.toString());
                             Document doc = query.findOne();
-//                        say(list.get(0).getMacAddress() + " near!", Snackbar.LENGTH_SHORT);
-                            showNotification(doc.getField("title").toString(), doc.getField("message").toString(), Integer.parseInt(doc.getField("price").toString()));
+
+                            // Get the Tipps accosiated with this beacon.
+                            if(currentTipps.isSet() && beaconChange){
+                                currentTipps = new SingleTipps(doc.getField("title").toString(), doc.getField("message").toString(), doc.getField("price").toString());
+                            }else if(!currentTipps.isSet()){
+                                currentTipps = new SingleTipps(doc.getField("title").toString(), doc.getField("message").toString(), doc.getField("price").toString());
+                            }
+//                            showNotification(doc.getField("title").toString(), doc.getField("message").toString(), Integer.parseInt(doc.getField("price").toString()));
                         }
-                        // TODO: update the UI here
-//                    Log.d("Airport", "Nearest places: " + places);
                     }
                     else{
-                        Log.d("METEOR", "Meteor connected: "+  mMeteor.isConnected());
+                        Log.d("METEOR", "Meteor conection: "+  mMeteor.isConnected());
                         notificationManager.cancel(notificationID);
+                    }
+                    if(list.isEmpty()){
+                        notificationManager.cancel(notificationID);
+                        currentTipps = new SingleTipps("Tomt Tipps", "Her har det skjedd noe feil", "0"); // There are no beacons, hence no tipps.
+                    }else{
+                        if(currentTipps.isSet()){
+                            showNotification(currentTipps.getTitle(), currentTipps.getMessage(), currentTipps.getPrice());
+                        }
                     }
                 }
 
@@ -240,7 +279,7 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
 
     @Override
     protected void onPause() {
-        beaconManager.stopRanging(region);
+//        beaconManager.stopRanging(region);
 
         super.onPause();
     }
@@ -377,8 +416,8 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
     @Override
     public void onDataAdded(String collectionName, String documentID, String newValuesJson) {
         say("Data data added", Snackbar.LENGTH_SHORT);
-//        Log.d("METEOR", Arrays.toString(mMeteor.getDatabase().getCollectionNames()));
-        Log.d("METEOR", String.valueOf(mMeteor.getDatabase().getCollection("Beacons")));
+        Log.d("METEOR", Arrays.toString(mMeteor.getDatabase().getCollectionNames()));
+        Log.d("METEOR", String.valueOf(mMeteor.getDatabase().getCollection("beacons")));
     }
 
     /**
@@ -393,6 +432,9 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
     public void onDataChanged(String collectionName, String documentID, String updatedValuesJson, String removedValuesJson) {
         say("Data changed", Snackbar.LENGTH_SHORT);
 
+        Document doc = database.getCollection("beacon").getDocument(documentID);
+        currentTipps = new SingleTipps(doc.getField("title").toString(), doc.getField("message").toString(), doc.getField("price").toString());
+        Log.d("SIRI", "Data changed!");
     }
 
     /**
