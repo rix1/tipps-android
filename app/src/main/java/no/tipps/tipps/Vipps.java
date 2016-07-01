@@ -312,7 +312,7 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
     private void say(String s, int length){
         Snackbar snackbar = Snackbar
                 .make(coordinatorLayout, s, length);
-        snackbar.show();
+//        snackbar.show();
     }
 
     public void showNotification(String title, String message, int price) {
