@@ -35,7 +35,7 @@ import java.util.UUID;
 public class Vipps extends AppCompatActivity implements MeteorCallback {
 
     private static final int ENDPOINT_PORT = 3000;
-    private static final String ENDPOINT_IP = "129.241.220.134";
+    private static final String ENDPOINT_IP = "129.241.221.119";
     private final String TAG = Vipps.class.getSimpleName();
 
     private BeaconManager beaconManager;
@@ -121,28 +121,33 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
             @Override
             public void onBeaconsDiscovered(Region region, List<Beacon> list) {
 
-                Beacon test = list.get(0);
+                if(list.size() > 0){
 
-                Query query= mMeteor.getDatabase().getCollection("Beacons").whereEqual("macAddress", test.getMacAddress().toStandardString());
+                    Beacon test = list.get(0);
+                    Log.d("BEACON", "Beacon discovered: " + test.getMacAddress().toStandardString());
+                    Query query= mMeteor.getDatabase().getCollection("Beacons").whereEqual("macAddress", test.getMacAddress().toStandardString());
 
-                if (!list.isEmpty()) {
-                    Beacon nearestBeacon = list.get(0);
+                    if (mMeteor.isConnected() && !list.isEmpty()) {
+                        Beacon nearestBeacon = list.get(0);
 
-                    if(query == null){
-                        Log.d("SIRI", "OBJECT IS NULL");
-                        notificationManager.cancel(notificationID);
-                    }else{
-//                        Log.d("SIRI", query.toString());
-                        Document doc = query.findOne();
+                        if(query == null){
+                            Log.d("SIRI", "OBJECT IS NULL");
+                            notificationManager.cancel(notificationID);
+                        }else{
+                            Log.d("SIRI", query.toString());
+                            Document doc = query.findOne();
 //                        say(list.get(0).getMacAddress() + " near!", Snackbar.LENGTH_SHORT);
-                        showNotification(doc.getField("title").toString(), doc.getField("message").toString(), Integer.parseInt(doc.getField("price").toString()));
-                    }
-                    // TODO: update the UI here
+                            showNotification(doc.getField("title").toString(), doc.getField("message").toString(), Integer.parseInt(doc.getField("price").toString()));
+                        }
+                        // TODO: update the UI here
 //                    Log.d("Airport", "Nearest places: " + places);
+                    }
+                    else{
+                        Log.d("METEOR", "Meteor connected: "+  mMeteor.isConnected());
+                        notificationManager.cancel(notificationID);
+                    }
                 }
-                else{
-                    notificationManager.cancel(notificationID);
-                }
+
             }
         });
     }
