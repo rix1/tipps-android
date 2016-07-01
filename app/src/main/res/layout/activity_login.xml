@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
               android:gravity="center_horizontal"
               android:orientation="vertical"
               android:paddingBottom="@dimen/activity_vertical_margin"
@@ -32,10 +32,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/intro"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="80dp"
                 android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:textSize="22dp"
+
+                android:textSize="18sp"
                 android:textAlignment="center"
                 android:id="@+id/login_name"
                 />
@@ -54,8 +54,8 @@
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:text="@string/bigSpender"
-                         android:textSize="20dp"
-                         android:layout_marginLeft="20dp"
+                         android:textSize="16sp"
+                         android:layout_marginStart="40dp"
                          android:checked="true"
                     />
 
@@ -63,10 +63,10 @@
                          android:textColor="#FFFFFF"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:layout_marginTop="20dp"
+                         android:layout_marginTop="15dp"
                          android:layout_marginBottom="130dp"
-                         android:textSize="20dp"
-                         android:layout_marginLeft="20dp"
+                         android:textSize="16sp"
+                         android:layout_marginStart="40dp"
                          android:text="@string/savingMode"/>
         </RadioGroup>
 
@@ -74,7 +74,9 @@
                 android:id="@+id/name_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="250dp">
+                android:layout_marginTop="350dp"
+                app:hintTextAppearance="@style/TextLabel"
+                android:minHeight="30dp">
 
             <AutoCompleteTextView
                     android:id="@+id/name"
