@@ -24,8 +24,7 @@
     <string name="title_activity_register">RegisterActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="title_activity_tipps">BØRSBAREN</string>
-
+    <string name="title_activity_tipps">Heisen</string>
     <string name="large_text">
         "FISKEBODEN\n\n"
         "Hysefilet med ristet sopp og potetpure eller Fiskeburger med hummermajones, potetbåter og råkost\n"
@@ -38,5 +37,6 @@
         "SALATBODEN\n\n"
         "Tomatsuppe med kyllingkjøtt, bønner og mais eller Urtesuppe(vegetar)\n"
         "Pris 35,-\n\n"
+        "hhe"
     </string>
 </resources>

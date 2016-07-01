@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import static no.tipps.tipps.R.drawable.tipps;
 
@@ -17,6 +18,12 @@ public class TippsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tipps);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        TextView tippsText = (TextView) findViewById(R.id.tippstext);
+
+        tippsText.setText(getResources().getString(R.string.large_text));
+
+        toolbar.setTitle(getResources().getString(R.string.title_activity_tipps));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
