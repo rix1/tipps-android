@@ -35,7 +35,7 @@ import java.util.UUID;
 public class Vipps extends AppCompatActivity implements MeteorCallback {
 
     private static final int ENDPOINT_PORT = 3000;
-    private static final String ENDPOINT_IP = "129.241.220.193";
+    private static final String ENDPOINT_IP = "129.241.220.134";
     private final String TAG = Vipps.class.getSimpleName();
 
     private BeaconManager beaconManager;
@@ -120,20 +120,10 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
         beaconManager.setRangingListener(new BeaconManager.RangingListener() {
             @Override
             public void onBeaconsDiscovered(Region region, List<Beacon> list) {
-//                Log.d("BEACON", "BEACONS Discovered! #" + list.size());
-//                Log.d("BEACON", list.toString());
 
-//                beacons[0] = database.getCollection("Beacon");
-//                String[] ids = beacons[0].getDocumentIds();
-//                Document doc = beacons[0].getDocument(ids[0]);
+                Beacon test = list.get(0);
 
-//                Log.d("GUNNAR", doc.getField("macAddress").toString());
-//                doc.
-//                Document doc = database.getCollection("Beacon").
-//                 Object obj = mMeteor.getDatabase().getCollection("Beacons").getDocument("bSZWnxLu3BuHi7Cug").getField("macAddress");
-
-
-                Query query= mMeteor.getDatabase().getCollection("Beacons").whereEqual("macAddress", list.get(0).getMacAddress().toStandardString());
+                Query query= mMeteor.getDatabase().getCollection("Beacons").whereEqual("macAddress", test.getMacAddress().toStandardString());
 
                 if (!list.isEmpty()) {
                     Beacon nearestBeacon = list.get(0);
