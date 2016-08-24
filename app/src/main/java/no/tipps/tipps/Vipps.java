@@ -39,7 +39,7 @@ import java.util.*;
 public class Vipps extends AppCompatActivity implements MeteorCallback {
 
     private static final int ENDPOINT_PORT = 3000;
-    private static final String ENDPOINT_IP = "129.241.221.119";
+    private static final String ENDPOINT_IP = "129.241.220.240";
     private final String TAG = Vipps.class.getSimpleName();
 
     private BeaconManager beaconManager;
@@ -145,6 +145,7 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
                     if (mMeteor.isConnected() && !list.isEmpty()) { // Server is connected and beacons are nearby
                         Beacon newBeacon = list.get(0);
 
+                        Log.d("FIX", newBeacon.getMacAddress().toStandardString());
                         query = mMeteor.getDatabase().getCollection("beacons").whereEqual("macAddress", newBeacon.getMacAddress().toStandardString());
 
 //
@@ -158,8 +159,6 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
 //                            showNotification(currentTipps.getTitle(), currentTipps.getMessage(), currentTipps.getPrice());
 //
 //                        }
-
-
 //                        -------------------------------------
 
                         if(first){
@@ -249,7 +248,8 @@ public class Vipps extends AppCompatActivity implements MeteorCallback {
     }
 
     private String getEndpointURL(String ip, int port){
-        String url = "ws://" + ip + ":" + port + "/websocket";
+//        String url = "ws://" + ip + ":" + port + "/websocket";
+        String url = "wss://admin.tipps.no/websocket";
         Log.d("METEOR", "Endpoint URL: "+ url);
         return url;
     }
